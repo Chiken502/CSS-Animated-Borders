@@ -1,0 +1,74 @@
+body {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    background-color: black;
+    color: aliceblue;
+}
+
+h1 {
+    font-size: 32px;
+    text-align: center;
+}
+
+p {
+    font-size: 20px;
+    text-align: left;
+}
+
+.card {
+    position: relative;
+    background-color:rgb(7, 18, 29);
+    
+    border-radius: 10px;
+    
+    width: 30%;
+    margin: 0px auto;
+    margin-top: 50px;
+    padding: 2em;
+
+}
+
+@property --angle{
+    syntax: "<angle>";
+    initial-value: 0deg;
+    inherits: false;
+}
+.card::after, .card::before{
+    /** This section is mandatory **/
+    content: "";
+    position: absolute;
+    /** This sets your effect to the same size as the normal card class **/
+    height: 100%;
+    width: 100%;
+
+    /** If you added a border radius to the card class, add this line with the same value as before **/
+    border-radius: 10px;
+
+    /** This code is used to position the after element right under your card **/
+    top: 50%;
+    left: 50%;
+    translate: -50% -50%;
+    z-index: -1;
+
+    /** Time to Customize! **/
+    /** Change padding to change how large your border is **/
+    padding: 3px;
+    /** Change the conic-gradient colors to change the appearance but always keep 'from var(--angle)' **/
+    /** Use 'transparent 70%, color' or a list of colors for different effects **/
+    background-image: conic-gradient(from var(--angle), #540D6E,#EE4266, #FFD23F,#540D6E);
+
+    /** Only change the seconds value to change how fast your card animation is **/
+    animation: 3s spin linear infinite;
+}
+.card::before{
+    filter: blur(1.5rem);
+    /** Change the opacity to change how intense the blur is **/
+    opacity: 0.5;
+}
+@keyframes spin{
+    from{
+        --angle: 0deg;
+    }
+    to{
+        --angle: 360deg;
+    }
+}
